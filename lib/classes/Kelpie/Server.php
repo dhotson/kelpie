@@ -1,0 +1,123 @@
+<?php
+
+class Kelpie_Server
+{
+	private $_host;
+	private $_port;
+
+	public function __construct($host = '0.0.0.0', $port = 8000)
+	{
+		$this->_host = $host;
+		$this->_port = $port;
+	}
+
+	/**
+	 * Start serving requests to the application
+	 * @param Kelpie_Application
+	 */
+	public function start($app)
+	{
+		if (!($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)))
+		{
+			throw new Kelpie_Exception(socket_strerror(socket_last_error()));
+		}
+
+		if (!socket_set_option($socket, SOL_SOCKET, SO_REUSEADDR, 1))
+		{
+			throw new Kelpie_Exception(socket_strerror(socket_last_error()));
+		}
+
+		if (!socket_bind($socket, $this->_host, $this->_port))
+		{
+			throw new Kelpie_Exception(socket_strerror(socket_last_error()));
+		}
+
+		if (!socket_listen($socket))
+		{
+			throw new Kelpie_Exception(socket_strerror(socket_last_error()));
+		}
+
+		// Prefork a number of child processes to handle incoming connections
+		$maxConcurrency = 5;
+		$procs = array();
+		while(true)
+		{
+			if (-1 == ($pid = pcntl_fork()))
+			{
+				throw new Exception('Could not fork');
+			}
+			else if ($pid == 0)
+			{
+				$this->_child($socket, $app);
+				exit(0);
+			}
+			else // parent process
+			{
+				$procs[$pid] = $pid;
+			}
+
+			if (count($procs) >= $maxConcurrency)
+			{
+				if (-1 == ($pid = pcntl_wait($status)))
+				{
+					throw new Exception('Something went wrong in pcntl_wait');
+				}
+
+				$exitStatus = pcntl_wexitstatus($status);
+				unset($procs[$pid]);
+			}
+		}
+	}
+
+	private function _child($socket, $app)
+	{
+		while ($client = socket_accept($socket))
+		{
+			$data = '';
+			$nparsed = 0;
+
+			$h = new HttpParser();
+
+			while ($d = socket_read($client, 1024 * 1024))
+			{
+				$data .= $d;
+				$nparsed = $h->execute($data, $nparsed);
+
+				if ($h->isFinished())
+				{
+					break;
+				}
+
+				if ($h->hasError())
+				{
+					socket_close($client);
+					continue 2; //
+				}
+			}
+
+			$env = $h->getEnvironment();
+
+			$result = $app->call($env);
+
+			$response = new Kelpie_Response();
+			$response->setStatus($result[0]);
+			$response->setHeaders($result[1]);
+			$response->setBody($result[2]);
+
+			foreach ($response as $chunk)
+			{
+				$len = strlen($chunk);
+				$offset = 0;
+				while ($offset < $len)
+				{
+					if (false === ($n = @socket_write($client, substr($chunk, $offset), $len-$offset)))
+						break 2;
+
+					$offset += $n;
+				}
+			}
+
+			socket_close($client);
+		}
+	}
+}
