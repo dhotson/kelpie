@@ -1,6 +1,6 @@
 <?php
 
-class Kelpie_Response
+class Kelpie_Server_Response
 	implements IteratorAggregate
 {
 	const CONNECTION = 'Connection';

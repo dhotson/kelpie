@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * A simple preforking server for running Kelpie apps
+ */
 class Kelpie_Server
 {
 	private $_host;
@@ -44,7 +47,7 @@ class Kelpie_Server
 		{
 			if (-1 == ($pid = pcntl_fork()))
 			{
-				throw new Exception('Could not fork');
+				throw new Kelpie_Exception('Could not fork');
 			}
 			else if ($pid == 0)
 			{
@@ -60,7 +63,7 @@ class Kelpie_Server
 			{
 				if (-1 == ($pid = pcntl_wait($status)))
 				{
-					throw new Exception('Something went wrong in pcntl_wait');
+					throw new Kelpie_Exception('Something went wrong in pcntl_wait');
 				}
 
 				$exitStatus = pcntl_wexitstatus($status);
@@ -99,7 +102,7 @@ class Kelpie_Server
 
 			$result = $app->call($env);
 
-			$response = new Kelpie_Response();
+			$response = new Kelpie_Server_Response();
 			$response->setStatus($result[0]);
 			$response->setHeaders($result[1]);
 			$response->setBody($result[2]);

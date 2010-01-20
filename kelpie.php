@@ -2,17 +2,40 @@
 
 require_once 'lib/kelpie_init.php';
 
-class HelloWorldApp
+class HelloWorld extends Kelpie_App
 {
-	public function call($env)
+	/**
+	 * @get /
+	 */
+	public function home()
 	{
-		return array(
-			200,
-			array("Content-Type" => "text/plain"),
-			array("hello world\n", "this is a test\n")
-		);
+		return 'welcome';
+	}
+
+	/**
+	 * @get /posts/#id
+	 */
+	public function view($id)
+	{
+		return '<a href="/posts/'.$id.'/edit">Edit</a>';
+	}
+
+	/**
+	 * @get /posts/#id/:action
+	 */
+	public function edit($id, $action)
+	{
+		return '<form action="" method="post"><input type="submit" name="test" value="blargh" /></form>';
+	}
+
+	/**
+	 * @post /posts/#id/:action
+	 */
+	public function postedit($id, $action)
+	{
+		return 'Cool! '.$id.'-> '.$action;
 	}
 }
 
 $server = new Kelpie_Server('0.0.0.0', 8000);
-$server->start(new HelloWorldApp());
+$server->start(new HelloWorld());
