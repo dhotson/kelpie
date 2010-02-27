@@ -1,6 +1,6 @@
 <?php
 
-require_once 'lib/kelpie_init.php';
+require_once 'kelpie_init.php';
 
 class HelloWorld extends Kelpie_App
 {
