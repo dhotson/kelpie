@@ -1,47 +1,53 @@
-=== Kelpie
+= Kelpie
+
 A little web server in PHP.
 
-=== Installation
+== Installation
 
 You'll need the httpparser extension, it's a PHP extension
-for the C http parser from the mongrel web server.
-http://github.com/dhotson/httpparser-php
+for the C http parser from the mongrel web server:
 
-=== Usage
+    * http://github.com/dhotson/httpparser-php
+
+== Usage
 
 An simple web application:
 
-class HelloWorldApp
-{
-	public function call($env)
-	{
-		return array(
-			200,
-			array("Content-Type" => "text/plain"),
-			array("hello world")
-		);
-	}
-}
+    class HelloWorldApp
+    {
+    	public function call($env)
+    	{
+    		return array(
+    			200,
+    			array("Content-Type" => "text/plain"),
+    			array("hello world")
+    		);
+    	}
+    }
 
 The interface is basically the same as Ruby's Rack:
-http://chneukirchen.org/blog/archive/2007/02/introducing-rack.html
+
+    * http://chneukirchen.org/blog/archive/2007/02/introducing-rack.html
 
 To start the server:
 
-require_once '/path/to/kelpie/lib/kelpie_init.php';
-$server = new Kelpie_Server('0.0.0.0', 8000);
-$server->start(new HelloWorldApp());
+    require_once '/path/to/kelpie/lib/kelpie_init.php';
+    $server = new Kelpie_Server('0.0.0.0', 8000);
+    $server->start(new HelloWorldApp());
 
-=== Credits
+== Credits
 
 This little project is heavily inspired by the Thin web server and
 the Rack web server interface.
+
 A lot of the classes are a direct port of Ruby classes in Thin.
+
 I can't claim much credit in writing them.
 
-Thanks go to the guys who created Thin and Rack.
-http://code.macournoyer.com/thin/
-http://rack.rubyforge.org/
+Thanks go to the guys who created Thin and Rack:
+
+  * http://code.macournoyer.com/thin/
+  * http://rack.rubyforge.org/
 
 The http parser is from Mongrel http://mongrel.rubyforge.org by Zed Shaw.
 Mongrel Web Server (Mongrel) is copyrighted free software by Zed A. Shaw
@@ -49,4 +55,5 @@ Mongrel Web Server (Mongrel) is copyrighted free software by Zed A. Shaw
 either the terms of the GPL.
 
 I also blatantly stole Chris Corbyn's PHP autoloader from Swift Mailer:
-http://swiftmailer.org
+
+  * http://swiftmailer.org
