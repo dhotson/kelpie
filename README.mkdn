@@ -30,7 +30,7 @@ An simple web application:
 
 The interface is basically the same as Ruby's Rack:
 
-    * http://chneukirchen.org/blog/archive/2007/02/introducing-rack.html
+  * http://chneukirchen.org/blog/archive/2007/02/introducing-rack.html
 
 To start the server:
 
