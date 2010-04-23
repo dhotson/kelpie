@@ -1,15 +1,18 @@
-= Kelpie
+Kelpie
+====
 
 A little web server in PHP.
 
-== Installation
+Installation
+----
 
 You'll need the httpparser extension, it's a PHP extension
 for the C http parser from the mongrel web server:
 
     * http://github.com/dhotson/httpparser-php
 
-== Usage
+Usage
+----
 
 An simple web application:
 
@@ -35,7 +38,8 @@ To start the server:
     $server = new Kelpie_Server('0.0.0.0', 8000);
     $server->start(new HelloWorldApp());
 
-== Credits
+Credits
+----
 
 This little project is heavily inspired by the Thin web server and
 the Rack web server interface.
