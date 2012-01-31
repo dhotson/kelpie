@@ -40,40 +40,6 @@ class Kelpie_Server
 			throw new Kelpie_Exception(socket_strerror(socket_last_error()));
 		}
 
-		// Prefork a number of child processes to handle incoming connections
-		$maxConcurrency = 5;
-		$procs = array();
-		while(true)
-		{
-			if (-1 == ($pid = pcntl_fork()))
-			{
-				throw new Kelpie_Exception('Could not fork');
-			}
-			else if ($pid == 0)
-			{
-				$this->_child($socket, $app);
-				exit(0);
-			}
-			else // parent process
-			{
-				$procs[$pid] = $pid;
-			}
-
-			if (count($procs) >= $maxConcurrency)
-			{
-				if (-1 == ($pid = pcntl_wait($status)))
-				{
-					throw new Kelpie_Exception('Something went wrong in pcntl_wait');
-				}
-
-				$exitStatus = pcntl_wexitstatus($status);
-				unset($procs[$pid]);
-			}
-		}
-	}
-
-	private function _child($socket, $app)
-	{
 		while ($client = socket_accept($socket))
 		{
 			$data = '';
