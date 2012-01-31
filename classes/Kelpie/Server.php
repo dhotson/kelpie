@@ -67,6 +67,7 @@ class Kelpie_Server
 			$env = $h->getEnvironment();
 
 			global $argv;
+			$env['SERVER_NAME'] = $this->_host;
 			$env['SERVER_PORT'] = $this->_port;
 			$env['SCRIPT_FILENAME'] = $argv[0];
 			socket_getpeername($client, $address);
