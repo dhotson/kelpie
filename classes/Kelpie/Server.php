@@ -66,6 +66,12 @@ class Kelpie_Server
 
 			$env = $h->getEnvironment();
 
+			global $argv;
+			$env['SERVER_PORT'] = $this->_port;
+			$env['SCRIPT_FILENAME'] = $argv[0];
+			socket_getpeername($client, $address);
+			$env['REMOTE_ADDR'] = $address;
+
 			$result = $app->call($env);
 
 			$response = new Kelpie_Server_Response();
