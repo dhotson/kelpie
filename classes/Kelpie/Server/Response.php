@@ -16,7 +16,7 @@ class Kelpie_Server_Response
 
 	public function __construct()
 	{
-		$this->_headers = new Kelpie_Headers();
+		$this->_headers = new Kelpie_Server_Headers();
 		$this->_status = 200;
 		$this->_persistent = false;
 	}

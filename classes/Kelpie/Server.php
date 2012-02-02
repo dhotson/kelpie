@@ -22,22 +22,22 @@ class Kelpie_Server
 	{
 		if (!($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)))
 		{
-			throw new Kelpie_Exception(socket_strerror(socket_last_error()));
+			throw new Kelpie_Server_Exception(socket_strerror(socket_last_error()));
 		}
 
 		if (!socket_set_option($socket, SOL_SOCKET, SO_REUSEADDR, 1))
 		{
-			throw new Kelpie_Exception(socket_strerror(socket_last_error()));
+			throw new Kelpie_Server_Exception(socket_strerror(socket_last_error()));
 		}
 
 		if (!socket_bind($socket, $this->_host, $this->_port))
 		{
-			throw new Kelpie_Exception(socket_strerror(socket_last_error()));
+			throw new Kelpie_Server_Exception(socket_strerror(socket_last_error()));
 		}
 
 		if (!socket_listen($socket))
 		{
-			throw new Kelpie_Exception(socket_strerror(socket_last_error()));
+			throw new Kelpie_Server_Exception(socket_strerror(socket_last_error()));
 		}
 
 		while ($client = socket_accept($socket))
