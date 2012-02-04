@@ -47,7 +47,7 @@ class Kelpie_Server
 
 			$h = new HttpParser();
 
-			while ($d = socket_read($client, 1024 * 1024))
+			while ($d = socket_read($client, 1024 * 1024 * 1024))
 			{
 				$data .= $d;
 				$nparsed = $h->execute($data, $nparsed);
