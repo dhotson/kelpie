@@ -1,29 +1,76 @@
+<!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
 	<title>Kelpie - A fast and lightweight PHP web server</title>
-	<link rel="icon" type="image/png" href="favicon.png">
-	<link href='kelpie.css' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Montserrat|Open+Sans' rel='stylesheet' type='text/css'>
+	<link rel="shortcut icon" href="favicon.ico" />
+	<link href='kelpie.css' rel='stylesheet' type='text/css' />
+	<link href='http://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Gentium+Book+Basic:400italic' rel='stylesheet' type='text/css' />
 </head>
 <body>
 	<div class="content">
 		<h1 class="logo">kelpie</h1>
-		<p class="tagline">a little web server in php</p>
+		<p class="tagline">A little web server in php</p>
 
-		<h2>What?</h2>
-		<p>
-			Kelpie is a web server for PHP that takes inspiration from the best parts of the Ruby web server ecosystem:
-			<ul>
-				<li>Rack, a minimal interface between webservers and Ruby frameworks</li>
-				<li>The Mongrel parser, the root of Mongrel speed and security. </li>
-				<li>Thin, a fast and simple Ruby web server</li>
-			</ul>
-		</p>
+		<h2>About</h2>
+		<p>Kelpie is a web server for PHP that takes inspiration from the best bits of the Ruby web server ecosystem:</p>
+		<ul>
+			<li><a href="http://rack.rubyforge.org/">Rack</a> — a minimal interface between webservers and Ruby frameworks</li>
+			<li>The <a href="http://rubyforge.org/projects/mongrel">Mongrel http parser</a> — the root of Mongrel speed and security</li>
+			<li><a href="http://code.macournoyer.com/thin/">Thin</a> — a fast and simple Ruby web server</li>
+		</ul>
 
 		<h2>Installation</h2>
+		<p>Get the Kelpie source code from <a href="https://github.com/dhotson/kelpie">github</a>:</p>
 		<p>
-			You will need to install the <a href="http://github.com/dhotson/httpparser-php">httpparser</a> extension. It's a PHP extension for the Mongrel http parser.
+			<code>git clone git@github.com:dhotson/kelpie.git</code>
+		</p>
+		<p>Kelpie requires the <a href="http://github.com/dhotson/httpparser-php">httpparser</a> extension. It's a PHP extension for the Mongrel http parser.</p>
+
+		<div class="installation">
+			<code>sudo aptitude install php-pear php5-dev</code>
+			<code>sudo pear channel-discover getkelpie.com/pear</code>
+			<code>sudo pear install kelpie/httpparser</code>
+		</div>
+
+		<h2>Usage</h2>
+		<p>Here's what a simple Kelpie application looks like:</p>
+
+<pre class="syntax code">class HelloWorldApp
+{
+  public function call($env)
+  {
+    return array(
+      200,
+      array("Content-Type" =&gt; "text/plain"),
+      array("Hello World")
+    );
+  }
+} </pre>
+
+		<p>To start a server:</p>
+<pre class="code">require_once 'lib/kelpie.php';
+$server = new Kelpie_Server('localhost', 8000);
+$server->start(new HelloWorld());</pre>
+
+		<p>Then in your web browser visit http://localhost:8000</p>
+
+		<p>The web server interface is very similar to Ruby's <a href="http://chneukirchen.org/blog/archive/2007/02/introducing-rack.html">Rack</a>:</p>
+		<blockquote>“Let’s do the easiest thing possible: The canonical format of a HTTP request probably is a hash of a CGI-like environment and a response consists of three parts: a status, a set of headers, and a body”.</blockquote>
+
+		<h2>Status</h2>
+		<p>Kelpie is still under active development.</p>
+		<p>Use it at your own peril. ;-)</p>
+		<p>Please <a href="mailto:dennis.hotson@gmail.com">get in touch</a> if you would like to contribute.</p>
+
+		<h2>Credits</h2>
+		<p>
+			Thanks go to the people behind <a href="http://rack.rubyforge.org/">Rack</a>, <a href="http://code.macournoyer.com/thin/">Thin</a> and <a href="http://rubyforge.org/projects/mongrel">Mongrel</a>.
+			Also, a big thank you to <a href="http://blog.milkfarmsoft.com/">Alexey Zakhlestin</a> for his code review and contributions to get the <a href="https://github.com/dhotson/httpparser-php">httppaarser php extension</a> into decent shape.
 		</p>
 
+		<h2>License</h2>
+		<p>Kelpie is <a href="http://www.opensource.org/licenses/MIT">MIT</a>. The httpparser extension is <a href="http://www.opensource.org/licenses/GPL-2.0">GPL</a>.</p>
 	</div>
-</body
+</body>
+</html>

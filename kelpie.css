@@ -1,5 +1,19 @@
 body {
 	font-family: 'Open Sans', sans-serif;
+	margin-bottom: 90px;
+}
+
+a {
+	color: #0000AA;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #4400AA;
+}
+
+a:hover {
+	text-decoration: underline;
 }
 
 h1.logo {
@@ -17,7 +31,48 @@ h1, h2, .tagline {
 	font-weight: normal;
 }
 
+h2:before {
+	display: block;
+	content: '*';
+	font-size: 200%;
+	text-align: center;
+}
+
+p, li {
+	line-height: 1.5;
+}
+
+li {
+	margin-bottom: 10px;
+}
+
 .content {
 	width: 400px;
 	margin: 15px auto;
+}
+
+ul {
+	margin: 0;
+}
+
+code {
+	display: block;
+	font-family: Menlo, "Bitstream Vera Sans Mono", monospace;
+	font-size: 14px;
+	background: #f6f6f6;
+	padding: 5px 10px;
+}
+
+.code {
+	padding: 10px;
+	font-family: Menlo, "Bitstream Vera Sans Mono", monospace;
+	font-size: 14px;
+	background: #f6f6f6;
+}
+
+blockquote {
+	font-family: 'Gentium Book Basic', serif;
+	font-style: italic;
+	line-height: 1.5;
+	margin: 0 0 0 10px;
 }
