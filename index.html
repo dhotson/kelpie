@@ -5,7 +5,7 @@
 	<title>Kelpie - A fast and lightweight PHP web server</title>
 	<link rel="shortcut icon" href="favicon.ico" />
 	<link href='kelpie.css' rel='stylesheet' type='text/css' />
-	<link href='http://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Gentium+Book+Basic:400italic' rel='stylesheet' type='text/css' />
+	<link href='http://fonts.googleapis.com/css?family=Montserrat|Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
 	<div class="content">
@@ -36,7 +36,7 @@
 		<h2>Usage</h2>
 		<p>Here's what a simple Kelpie application looks like:</p>
 
-<pre class="syntax code">class HelloWorldApp
+<pre class="syntax code">class HelloWorld
 {
   public function call($env)
   {
@@ -48,15 +48,14 @@
   }
 } </pre>
 
-		<p>To start a server:</p>
+		<p>The call method accepts an array of CGI like environment variables and returns an array of status code, headers, and body.</p>
+
+		<p>To run a Kelpie app, you need to start a server:</p>
 <pre class="code">require_once 'lib/kelpie.php';
 $server = new Kelpie_Server('localhost', 8000);
 $server->start(new HelloWorld());</pre>
 
 		<p>Then in your web browser visit http://localhost:8000</p>
-
-		<p>The web server interface is very similar to Ruby's <a href="http://chneukirchen.org/blog/archive/2007/02/introducing-rack.html">Rack</a>:</p>
-		<blockquote>“Let’s do the easiest thing possible: The canonical format of a HTTP request probably is a hash of a CGI-like environment and a response consists of three parts: a status, a set of headers, and a body”.</blockquote>
 
 		<h2>Status</h2>
 		<p>Kelpie is still under active development.</p>
