@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<server>
+  <name>getkelpie.org/pear</name>
+  <summary>Kelpie PEAR channel</summary>
+  <alias>kelpie</alias>
+  <url>http://getkelpie.org/pear</url>
+</server>
