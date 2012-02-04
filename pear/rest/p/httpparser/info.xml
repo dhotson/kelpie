@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<p xmlns="http://pear.php.net/dtd/rest.package" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://pear.php.net/dtd/rest.package    http://pear.php.net/dtd/rest.package.xsd">
+<n>httpparser</n>
+<c>getkelpie.com/pear</c>
+<ca xlink:href="/rest/c/Default">Default</ca>
+<l>GPL</l>
+<s>HTTP/1.1 Parser</s>
+<d>A PHP extension for the C http parser from Ruby's Mongrel web server.</d>
+<r xlink:href="/rest/r/httpparser" />
+</p>

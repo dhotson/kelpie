@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.9.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>httpparser</name>
+ <channel>getkelpie.com/pear</channel>
+ <summary>HTTP/1.1 Parser</summary>
+ <description>A PHP extension for the C http parser from Ruby&apos;s Mongrel web server.</description>
+ <lead>
+  <name>Dennis Hotson</name>
+  <user>dhotson</user>
+  <email>dennis.hotson@gmail.com</email>
+  <active>yes</active>
+ </lead>
+ <lead>
+  <name>Alexey Zakhlestin</name>
+  <user>indeyets</user>
+  <email>indeyets@gmail.com</email>
+  <active>yes</active>
+ </lead>
+ <date>2012-02-04</date>
+ <time>06:15:43</time>
+ <version>
+  <release>1.0.0</release>
+  <api>1.0</api>
+ </version>
+ <stability>
+  <release>stable</release>
+  <api>stable</api>
+ </stability>
+ <license uri="http://www.gnu.org/licenses/gpl-2.0.html">GPL</license>
+ <notes>
+- initial release
+ </notes>
+ <contents>
+  <dir name="/">
+   <file md5sum="fcd10d6bfd5a492f044d024b1aa85cbe" name="tests/001-simple.phpt" role="test" />
+   <file md5sum="6c60ba83a268ddd9e0604ca0a44973c2" name="tests/002-offset.phpt" role="test" />
+   <file md5sum="c49fcff56659d6de78c9088818e1b704" name="config.m4" role="src" />
+   <file md5sum="9e04e0c620710bea07c3fd856a1032ef" name="httpparser.c" role="src" />
+   <file md5sum="fd7b55ed67d816a6c672a70e9c8f354c" name="httpparser.h" role="src" />
+   <file md5sum="58be5a2620f9fe0361da8bbc77f1fd26" name="http11_parser.c" role="src" />
+   <file md5sum="3e2a7cd8fdf9f9786db5b8f3a00d0424" name="http11_parser.h" role="src" />
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.2.1</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <providesextension>httpparser</providesextension>
+ <extsrcrelease />
+</package>

@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://getkelpie.org/pear</id>
-    <updated>2012-02-04T17:13:48+11:00</updated>
+    <updated>2012-02-04T17:15:57+11:00</updated>
     <title>Kelpie PEAR channel Latest Releases</title>
     <link href="http://getkelpie.org/pear/feed.xml" rel="self" />
     <author>
         <name>http://getkelpie.org/pear</name>
     </author>
 
-
+    <entry>
+        <title>httpparser 1.0.0 (stable)</title>
+        <link href="http://getkelpie.org/pear/get/httpparser-1.0.0.tgz" />
+        <id>http://getkelpie.org/pear/get/httpparser-1.0.0.tgz</id>
+        <author>
+            <name>dhotson</name>
+        </author>
+        <updated>2012-02-04T06:15:43+11:00</updated>
+        <content>
+            
+- initial release
+ 
+        </content>
+    </entry>
 </feed>
