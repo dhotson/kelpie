@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://getkelpie.org/pear</id>
-    <updated>2012-02-04T16:12:45+11:00</updated>
+    <updated>2012-02-04T17:13:48+11:00</updated>
     <title>Kelpie PEAR channel Latest Releases</title>
     <link href="http://getkelpie.org/pear/feed.xml" rel="self" />
     <author>
