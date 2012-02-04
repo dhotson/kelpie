@@ -1,0 +1,22 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+
+h1.logo {
+	display: block;
+	width: 150px;
+	height: 159px;
+	margin: 0 auto;
+	text-indent: -99999px;
+	background: url(kelpie.png);
+}
+
+h1, h2, .tagline {
+	font-family: 'Montserrat', sans-serif;
+	text-align: center;
+}
+
+.content {
+	width: 400px;
+	margin: 15px auto;
+}
