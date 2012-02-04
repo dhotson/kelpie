@@ -14,18 +14,18 @@ for the C http parser from the mongrel web server:
 Usage
 ----
 
-An simple web application:
+A simple web application:
 
     class HelloWorldApp
     {
-    	public function call($env)
-    	{
-    		return array(
-    			200,
-    			array("Content-Type" => "text/plain"),
-    			array("hello world")
-    		);
-    	}
+      public function call($env)
+      {
+        return array(
+          200,
+          array("Content-Type" => "text/plain"),
+          array("Hello World")
+        );
+      }
     }
 
 The interface is basically the same as Ruby's Rack:
@@ -34,18 +34,17 @@ The interface is basically the same as Ruby's Rack:
 
 To start the server:
 
-    require_once '/path/to/kelpie/lib/kelpie_init.php';
+    require_once 'lib/kelpie.php';
     $server = new Kelpie_Server('0.0.0.0', 8000);
     $server->start(new HelloWorldApp());
 
 Credits
 ----
 
-This little project is heavily inspired by the Thin web server and
+This little project is inspired by the Thin web server and
 the Rack web server interface.
 
-A lot of the classes are a direct port of Ruby classes in Thin.
-
+A lot of the classes are a direct port of Ruby classes in Thin and Rack.
 I can't claim much credit in writing them.
 
 Thanks go to the guys who created Thin and Rack:
@@ -57,7 +56,3 @@ The http parser is from Mongrel http://mongrel.rubyforge.org by Zed Shaw.
 Mongrel Web Server (Mongrel) is copyrighted free software by Zed A. Shaw
 <zedshaw at zedshaw dot com> You can redistribute it and/or modify it under
 either the terms of the GPL.
-
-I also blatantly stole Chris Corbyn's PHP autoloader from Swift Mailer:
-
-  * http://swiftmailer.org

@@ -1,8 +1,8 @@
 <?php
 
-require_once 'kelpie_init.php';
+require_once 'lib/kelpie.php';
 
-class HelloWorld
+class HelloWorldApp
 {
 	public function call($env)
 	{
@@ -15,4 +15,4 @@ class HelloWorld
 }
 
 $server = new Kelpie_Server('0.0.0.0', 8000);
-$server->start(new HelloWorld());
+$server->start(new HelloWorldApp());
