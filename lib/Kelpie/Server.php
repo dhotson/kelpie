@@ -1,7 +1,7 @@
 <?php
 
 /**
- * A simple preforking server for running Kelpie apps
+ * A simple single-threaded tcp server for running Kelpie apps
  */
 class Kelpie_Server
 {
@@ -60,7 +60,7 @@ class Kelpie_Server
 				if ($h->hasError())
 				{
 					socket_close($client);
-					continue 2; //
+					continue 2; // Skip to accept next connection..
 				}
 			}
 
@@ -73,12 +73,12 @@ class Kelpie_Server
 			socket_getpeername($client, $address);
 			$env['REMOTE_ADDR'] = $address;
 
-			$result = $app->call($env);
+			list($status, $headers, $body) = $app->call($env);
 
 			$response = new Kelpie_Server_Response();
-			$response->setStatus($result[0]);
-			$response->setHeaders($result[1]);
-			$response->setBody($result[2]);
+			$response->setStatus($status);
+			$response->setHeaders($headers);
+			$response->setBody($body);
 
 			foreach ($response as $chunk)
 			{
