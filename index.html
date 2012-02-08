@@ -31,19 +31,6 @@
 			<li><a href="http://code.macournoyer.com/thin/">Thin</a> — a fast and simple Ruby web server</li>
 		</ul>
 
-		<h2>Installation</h2>
-		<p>Get the Kelpie source code from <a href="https://github.com/dhotson/kelpie">github</a>:</p>
-		<p>
-			<code>git clone https://github.com/dhotson/kelpie.git</code>
-		</p>
-		<p>Kelpie requires the <a href="http://github.com/dhotson/httpparser-php">httpparser</a> extension. It's a PHP extension for the Mongrel http parser.</p>
-
-		<div class="installation">
-			<code>sudo aptitude install php-pear php5-dev</code>
-			<code>sudo pear channel-discover getkelpie.com/pear</code>
-			<code>sudo pear install kelpie/httpparser</code>
-		</div>
-
 		<h2>Usage</h2>
 		<p>Here's what a simple Kelpie application looks like:</p>
 
@@ -67,6 +54,19 @@ $server = new Kelpie_Server('localhost', 8000);
 $server->start(new HelloWorld());</pre>
 
 		<p>Then in your web browser visit http://localhost:8000</p>
+
+		<h2>Installation</h2>
+		<p>Get the Kelpie source code from <a href="https://github.com/dhotson/kelpie">github</a>:</p>
+		<p>
+			<code>git clone https://github.com/dhotson/kelpie.git</code>
+		</p>
+		<p>Kelpie requires the <a href="http://github.com/dhotson/httpparser-php">httpparser</a> extension. It's a PHP extension for the Mongrel http parser.</p>
+
+		<div class="installation">
+			<code>sudo aptitude install php-pear php5-dev</code>
+			<code>sudo pear channel-discover getkelpie.com/pear</code>
+			<code>sudo pear install kelpie/httpparser</code>
+		</div>
 
 		<h2>Status</h2>
 		<p>Kelpie is still under active development.</p>
