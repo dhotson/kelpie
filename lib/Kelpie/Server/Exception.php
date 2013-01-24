@@ -1,5 +1,5 @@
 <?php
 
-class Kelpie_Server_Exception extends Exception
-{
-}
+namespace Kelpie\Server;
+
+class Exception extends \Exception { }

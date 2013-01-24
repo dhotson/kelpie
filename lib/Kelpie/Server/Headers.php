@@ -1,9 +1,13 @@
 <?php
 
+namespace Kelpie\Server;
+
+use \ArrayAccess;
+
 /**
  * @author dennis@99designs.com
  */
-class Kelpie_Server_Headers implements ArrayAccess
+class Headers implements ArrayAccess
 {
 	private static $HEADER_FORMAT = "%s: %s\r\n";
 	private static $ALLOWED_DUPLICATES = array('Set-Cookie','Set-Cookie2','Warning','WWW-Authenticate');

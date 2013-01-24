@@ -1,7 +1,11 @@
 <?php
 
-class Kelpie_Server_Response
-	implements IteratorAggregate
+namespace Kelpie\Server;
+
+use \IteratorAggregate;
+use \Kelpie\Server\Headers;
+
+class Response implements IteratorAggregate
 {
 	const CONNECTION = 'Connection';
 	const CLOSE = 'close';
@@ -16,7 +20,7 @@ class Kelpie_Server_Response
 
 	public function __construct()
 	{
-		$this->_headers = new Kelpie_Server_Headers();
+		$this->_headers = new Headers();
 		$this->_status = 200;
 		$this->_persistent = false;
 	}
@@ -83,14 +87,14 @@ class Kelpie_Server_Response
 
 	public function getIterator()
 	{
-		$it = new AppendIterator();
+		$it = new \AppendIterator();
 
-		$it->append(new ArrayIterator(array($this->head())));
+		$it->append(new \ArrayIterator(array($this->head())));
 
 		if (is_string($this->_body))
-			$it->append(new ArrayIterator(array($this->_body)));
+			$it->append(new \ArrayIterator(array($this->_body)));
 		elseif (is_array($this->_body))
-			$it->append(new ArrayIterator($this->_body));
+			$it->append(new \ArrayIterator($this->_body));
 		elseif ($this->_body instanceof Iterator)
 			$it->append($this->_body);
 

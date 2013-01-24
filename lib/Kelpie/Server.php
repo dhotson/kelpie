@@ -1,9 +1,14 @@
 <?php
 
+namespace Kelpie;
+
+use \Kelpie\Server\Exception;
+use \Kelpie\Server\Response;
+
 /**
  * A simple single-threaded tcp server for running Kelpie apps
  */
-class Kelpie_Server
+class Server
 {
 	private $_host;
 	private $_port;
@@ -16,28 +21,28 @@ class Kelpie_Server
 
 	/**
 	 * Start serving requests to the application
-	 * @param Kelpie_Application
+	 * @param callable
 	 */
 	public function start($app)
 	{
 		if (!($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)))
 		{
-			throw new Kelpie_Server_Exception(socket_strerror(socket_last_error()));
+			throw new Exception(socket_strerror(socket_last_error()));
 		}
 
 		if (!socket_set_option($socket, SOL_SOCKET, SO_REUSEADDR, 1))
 		{
-			throw new Kelpie_Server_Exception(socket_strerror(socket_last_error()));
+			throw new Exception(socket_strerror(socket_last_error()));
 		}
 
 		if (!socket_bind($socket, $this->_host, $this->_port))
 		{
-			throw new Kelpie_Server_Exception(socket_strerror(socket_last_error()));
+			throw new Exception(socket_strerror(socket_last_error()));
 		}
 
 		if (!socket_listen($socket))
 		{
-			throw new Kelpie_Server_Exception(socket_strerror(socket_last_error()));
+			throw new Exception(socket_strerror(socket_last_error()));
 		}
 
 		while ($client = socket_accept($socket))
@@ -45,7 +50,7 @@ class Kelpie_Server
 			$data = '';
 			$nparsed = 0;
 
-			$h = new HttpParser();
+			$h = new \HttpParser();
 
 			while ($d = socket_read($client, 1024 * 1024 * 1024))
 			{
@@ -73,9 +78,9 @@ class Kelpie_Server
 			socket_getpeername($client, $address);
 			$env['REMOTE_ADDR'] = $address;
 
-			list($status, $headers, $body) = $app->call($env);
+			list($status, $headers, $body) = call_user_func($app, $env);
 
-			$response = new Kelpie_Server_Response();
+			$response = new Response();
 			$response->setStatus($status);
 			$response->setHeaders($headers);
 			$response->setBody($body);
