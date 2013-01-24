@@ -13,10 +13,25 @@ class Server
     private $_host;
     private $_port;
 
-    public function __construct($host = '0.0.0.0', $port = 8000)
+    public function __construct($host = '0.0.0.0', $port = 8000, $maxChildren=8, $maxRequests=1000)
     {
         $this->_host = $host;
         $this->_port = $port;
+        $this->_maxChildren = $maxChildren;
+        $this->_maxRequests = $maxRequests;
+
+        $this->_preForkCallbacks = array();
+        $this->_postForkCallbacks = array();
+    }
+
+    public function beforeFork($callback)
+    {
+      $this->_preForkCallbacks []= $callback;
+    }
+
+    public function afterFork($callback)
+    {
+      $this->_postForkCallbacks []= $callback;
     }
 
     /**
@@ -41,7 +56,40 @@ class Server
             throw new Exception(socket_strerror(socket_last_error()));
         }
 
-        while ($client = socket_accept($socket)) {
+        $children = array();
+        for (;;) {
+            if (count($children) > $this->_maxChildren) {
+              if (-1 === ($pid = pcntl_wait($status))) {
+                throw new \Exception('pcntl_wait failed');
+              }
+              unset($children[$pid]);
+              $code = pcntl_wexitstatus($status);
+              // TODO do something with return code
+            }
+
+            foreach ($this->_preForkCallbacks as $callback) {
+              call_user_func($callback);
+            }
+
+            if (-1 === ($pid = pcntl_fork())) {
+              throw new \Exception('Could not fork');
+            } elseif ($pid) {
+                $children[$pid] = true;
+            } else {
+                $this->_child($app, $socket);
+                exit(0);
+            }
+        }
+    }
+
+    private function _child($app, $socket)
+    {
+        foreach ($this->_postForkCallbacks as $callback) {
+          call_user_func($callback);
+        }
+
+        $i = $this->_maxRequests;
+        while ($i-- && ($client = socket_accept($socket))) {
             $data = '';
             $nparsed = 0;
 
@@ -81,7 +129,7 @@ class Server
                 $len = strlen($chunk);
                 $offset = 0;
                 while ($offset < $len) {
-                    if (false === ($n = @socket_write($client, substr($chunk, $offset), $len-$offset)))
+                    if (false === ($n = socket_write($client, substr($chunk, $offset), $len-$offset)))
                         break 2;
 
                     $offset += $n;
