@@ -1,0 +1,10 @@
+{
+  "name": "dhotson/kelpie",
+  "require": {
+    "php": ">=5.3.0",
+    "ext-httpparser": "*"
+  },
+  "autoload": {
+    "psr-0": {"Kelpie": "src/"}
+  }
+}

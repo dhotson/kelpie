@@ -1,6 +1,6 @@
 <?php
 
-require_once 'lib/kelpie.php';
+require 'vendor/autoload.php';
 
 $server = new \Kelpie\Server('0.0.0.0', 3512);
 $server->start(function($env) {
