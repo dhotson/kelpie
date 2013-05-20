@@ -11,9 +11,11 @@ for the C http parser from the mongrel web server:
 
     * http://github.com/dhotson/httpparser-php
 
-Kelpie can be installed with composer:
+Kelpie can be installed with composer.
 
-    TODO
+Add this to your composr.json:
+
+    "dhotson/kelpie": "dev-master"
 
 Usage
 ----
