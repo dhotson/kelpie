@@ -11,6 +11,10 @@ for the C http parser from the mongrel web server:
 
     * http://github.com/dhotson/httpparser-php
 
+Kelpie can be installed with composer:
+
+    TODO
+
 Usage
 ----
 
@@ -18,7 +22,7 @@ A simple web application:
 
     class HelloWorldApp
     {
-      public function call($env)
+      public function __invoke($env)
       {
         return array(
           200,
@@ -34,8 +38,8 @@ The interface is basically the same as Ruby's Rack:
 
 To start the server:
 
-    require_once 'lib/kelpie.php';
-    $server = new Kelpie_Server('0.0.0.0', 8000);
+    require_once 'vendor/autoload.php';
+    $server = new \Kelpie\Server('0.0.0.0', 8000);
     $server->start(new HelloWorldApp());
 
 Credits
