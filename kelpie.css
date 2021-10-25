@@ -68,6 +68,7 @@ code {
 	font-size: 14px;
 	background: #f6f6f6;
 	padding: 5px 10px;
+	overflow: auto;
 }
 
 .code {
@@ -75,6 +76,7 @@ code {
 	font-family: Menlo, "Bitstream Vera Sans Mono", monospace;
 	font-size: 14px;
 	background: #f6f6f6;
+	overflow: auto;
 }
 
 blockquote {
