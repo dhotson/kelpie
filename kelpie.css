@@ -1,3 +1,9 @@
+body, html {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
 body {
 	font-family: 'Open Sans', sans-serif;
 	margin-bottom: 90px;
@@ -47,7 +53,8 @@ li {
 }
 
 .content {
-	width: 400px;
+	width: 100%;
+	max-width: 400px;
 	margin: 15px auto;
 }
 
